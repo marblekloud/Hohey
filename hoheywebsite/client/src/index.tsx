@@ -4,7 +4,7 @@ import './index.css';
 import Uploads from './Uploads';
 import Home from './Home';
 import Nav from './Nav';
-import Videolist from './Videolist';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {
@@ -20,7 +20,7 @@ ReactDOM.render(
       <Nav />
       <Switch>
         <Route path="/upload" component={Uploads} />
-        <Route path="/videos" component={Videolist} />
+        <Route path="/videos" component={App} />
         <Route path="/" component={Home} />
       </Switch>
       <Web3Updater />
