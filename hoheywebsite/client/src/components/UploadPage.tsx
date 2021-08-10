@@ -69,7 +69,7 @@ class UploadPage extends PureComponent<{}, UploadState> {
                 </div>
 
                 <div className={styles.Recent}>
-                    <p className="Upload__Title">Upload File</p>
+                    <p className="Upload__Title">Upload Video</p>
                     <div className="Upload__InputSection">
                         <input
                             type="text"
@@ -89,12 +89,6 @@ class UploadPage extends PureComponent<{}, UploadState> {
                             }}
                         />
                     </div>
-
-                    <img
-                        src={!this.state.uploadedImageUrl.trim() ? Upload : this.state.uploadedImageUrl}
-                        alt="upload-image"
-                        className="Upload__Image"
-                    />
 
                     <button onClick={this.uploadImage} className="Upload__Button">Upload</button>
                 </div>

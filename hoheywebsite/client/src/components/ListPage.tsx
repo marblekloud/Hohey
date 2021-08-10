@@ -38,7 +38,7 @@ class ListPage extends PureComponent<{}, ListState> {
     render() {
         return (
             <div className="ListPage">
-                <p className={styles.ListPage__Title}>List of Files/Images</p>
+                <p className={styles.ListPage__Title}>Video list</p>
 
                 <div className={styles.listpage}>
                     {this.state.imageList.map((file) => (
