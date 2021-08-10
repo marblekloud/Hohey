@@ -33,9 +33,46 @@
   box-shadow: 2px 4px 3px #e5e5e5;
 }
 
-.Recent_title {
+.Recent_Title {
   font-weight: 700;
   text-transform: uppercase;
   opacity: 0.6;
   text-align: center;
+}
+
+.ListImage {
+  width: fit-content;
+  margin: 10px;
+  border: 2px solid #e5e5e5;
+  box-shadow: 2px 4px 3px #e5e5e5;
+  padding: 10px;
+}
+
+.ListImage__Delete {
+  background-color: white;
+  color: red;
+  display: block;
+  margin: 5px;
+  border-radius: 4px;
+  border-style: solid;
+  border-color: red;
+  border-width: 1px;
+}
+
+.ListImage__Delete:hover {
+  background-color: red;
+  color: white;
+  display: block;
+  margin: 5px;
+  border-radius: 4px;
+  border-style: solid;
+  transition: 0.1s;
+}
+
+.ListPage__Title {
+  font-weight: 700;
+  text-transform: uppercase;
+  opacity: 0.6;
+  text-align: center;
+  font-size: 30px;
 }

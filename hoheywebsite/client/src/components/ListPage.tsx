@@ -38,7 +38,7 @@ class ListPage extends PureComponent<{}, ListState> {
     render() {
         return (
             <div className="ListPage">
-                <p className="ListPage__Title">List of Files/Images</p>
+                <p className={styles.ListPage__Title}>List of Files/Images</p>
 
                 <div className={styles.listpage}>
                     {this.state.imageList.map((file) => (
@@ -48,8 +48,7 @@ class ListPage extends PureComponent<{}, ListState> {
                             <video src={'http://localhost:9890/image/' + file.filename}
                                 className="ListImage__Image"  width = "320" height = "240" controls>
                         </video>
-
-                            <button className="ListImage__Delete" onClick={() => this.deleteFile(file._id)}>Delete</button>
+                            <button className={styles.ListImage__Delete} onClick={() => this.deleteFile(file._id)}>Delete</button>
                         </div>
                     ))}
                 </div>
