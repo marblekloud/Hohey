@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import UploadPage from './components/UploadPage';
+import ListPage from './components/ListPage';
 import Uploads from './Uploads';
 import Home from './Home';
 import Nav from './Nav';
@@ -21,7 +22,8 @@ ReactDOM.render(
       <Nav />
       <Switch>
         <Route path="/upload" component={Uploads} />
-        <Route path="/videos" component={UploadPage} />
+        <Route path="/uploadpage" component={UploadPage} />
+        <Route path="/videolist" component={ListPage} />
         <Route path="/" component={Home} />
       </Switch>
       <Web3Updater />

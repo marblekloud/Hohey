@@ -10,9 +10,12 @@ function Nav() {
           Home
         </Link>
         <Link to="/upload">
-          Upload Video
+          Demo
         </Link>
-        <Link to="/videos">
+        <Link to="/uploadpage">
+          Upload video
+        </Link>
+        <Link to="/videolist">
           Video list
         </Link>
      </div>
