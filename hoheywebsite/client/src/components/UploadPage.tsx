@@ -56,7 +56,7 @@ class UploadPage extends PureComponent<{}, UploadState> {
         return (
             <div className={styles.UploadPage}>
                 <div className={styles.Recent}>
-                    <p className="Recent__Title">Recently uploaded file</p>
+                    <p className={styles.Recent_Title}>Recently uploaded file</p>
                     <div className={styles.ImageBox}>
                         <div className="CaptionBox">
                             <p className="ImageBox__Caption">Caption</p>

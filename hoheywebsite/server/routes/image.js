@@ -38,8 +38,8 @@ module.exports = (upload) => {
                         filename: req.file.filename,
                         fileId: req.file.id,
                     });
-
-                    if (image.contentType === 'video/mp4' || image.contentType === 'video/webm' || image.contentType === 'video/ogg') {
+                    
+                    if (req.file.filename.slice(-4) === '.mp4' || req.file.filename.slice(-5) === '.webm' || req.file.filename.slice(-4) === '.ogg' ) {
                         return res.status(200).json({
                             success: false,
                             message: 'fuck you',
