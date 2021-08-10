@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import './App.css';
 import axios from 'axios';
+import styles from './mystyle.module.css'; 
 
 interface ListState {
     imageList: any[];
@@ -39,16 +40,14 @@ class ListPage extends PureComponent<{}, ListState> {
             <div className="ListPage">
                 <p className="ListPage__Title">List of Files/Images</p>
 
-                <div className="ListImageContainer">
+                <div className={styles.listpage}>
                     {this.state.imageList.map((file) => (
-                        <div className="ListImage">
+                        <div className={styles.ListImage}>
                             <p className="ListImage__Caption">{file.caption}</p>
                             <p className="ListImage__Date">{file.createdAt}</p>
-                            <img
-                                src={'http://localhost:9890/image/' + file.filename}
-                                alt="list-image"
-                                className="ListImage__Image"
-                            />
+                            <video src={'http://localhost:9890/image/' + file.filename}
+                                className="ListImage__Image"  width = "320" height = "240" controls>
+                        </video>
 
                             <button className="ListImage__Delete" onClick={() => this.deleteFile(file._id)}>Delete</button>
                         </div>

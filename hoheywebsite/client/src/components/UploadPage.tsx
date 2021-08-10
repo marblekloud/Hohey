@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import './App.css';
 import axios from 'axios';
 import Upload from '../assets/images/upload.png';
+import styles from './mystyle.module.css'; 
 
 interface UploadState {
     recentImage: any;
@@ -53,10 +54,10 @@ class UploadPage extends PureComponent<{}, UploadState> {
 
     render() {
         return (
-            <div className="UploadPage">
-                <div className="Recent">
+            <div className={styles.UploadPage}>
+                <div className={styles.Recent}>
                     <p className="Recent__Title">Recently uploaded file</p>
-                    <div className="ImageBox">
+                    <div className={styles.ImageBox}>
                         <div className="CaptionBox">
                             <p className="ImageBox__Caption">Caption</p>
                             <span className="ImageBox__CaptionValue">{this.state.recentImage.caption}</span>
@@ -67,7 +68,7 @@ class UploadPage extends PureComponent<{}, UploadState> {
                     </div>
                 </div>
 
-                <div className="Upload">
+                <div className={styles.Recent}>
                     <p className="Upload__Title">Upload File</p>
                     <div className="Upload__InputSection">
                         <input

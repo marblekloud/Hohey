@@ -39,6 +39,13 @@ module.exports = (upload) => {
                         fileId: req.file.id,
                     });
 
+                    if (image.contentType === 'video/mp4' || image.contentType === 'video/webm' || image.contentType === 'video/ogg') {
+                        return res.status(200).json({
+                            success: false,
+                            message: 'fuck you',
+                        });
+                    }
+
                     newImage.save()
                         .then((image) => {
 
@@ -128,10 +135,10 @@ module.exports = (upload) => {
                 }
 
                 files.map(file => {
-                    if (file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/svg') {
+                    if (file.contentType === 'video/mp4' || file.contentType === 'video/webm' || file.contentType === 'video/ogg') {
                         file.isImage = true;
                     } else {
-                        file.isImage = true;
+                        file.isImage = false;
                     }
                 });
 
