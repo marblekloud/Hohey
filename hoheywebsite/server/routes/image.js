@@ -26,12 +26,6 @@ module.exports = (upload) => {
             Image.findOne({ caption: req.body.caption })
                 .then((image) => {
                     console.log(image);
-                    if (image) {
-                        return res.status(200).json({
-                            success: false,
-                            message: 'Image already exists',
-                        });
-                    }
 
                     let newImage = new Image({
                         caption: req.body.caption,
@@ -39,14 +33,14 @@ module.exports = (upload) => {
                         fileId: req.file.id,
                     });
                     
-                    if (req.file.filename.slice(-4) === '.mp4' || req.file.filename.slice(-5) === '.webm' || req.file.filename.slice(-4) === '.ogg' ) {
+                    if (req.file.filename.slice(-4) !== '.mp4' && req.file.filename.slice(-5) !== '.webm' && req.file.filename.slice(-4) !== '.ogg' ) {
                         return res.status(200).json({
                             success: false,
-                            message: 'fuck you',
+                            message: 'Not a video',
                         });
                     }
-
-                    newImage.save()
+                    else {
+                        newImage.save()
                         .then((image) => {
 
                             res.status(200).json({
@@ -55,6 +49,10 @@ module.exports = (upload) => {
                             });
                         })
                         .catch(err => res.status(500).json(err));
+
+                    }
+
+                    
                 })
                 .catch(err => res.status(500).json(err));
         })

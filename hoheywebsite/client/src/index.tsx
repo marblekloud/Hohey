@@ -5,6 +5,7 @@ import UploadPage from './components/UploadPage';
 import ListPage from './components/ListPage';
 import Home from './Home';
 import Nav from './Nav';
+import Root from './example/pages/_app';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {
@@ -19,10 +20,12 @@ ReactDOM.render(
     <Web3Provider>
       <Nav />
       <Switch>
+        <Route path="/connector" component={Root} />
         <Route path="/connectwallet" component={Home} />
         <Route path="/upload" component={UploadPage} />
         <Route path="/" component={ListPage} />
-      </Switch>
+        
+        </Switch>
       <Web3Updater />
     </Web3Provider>
     </Router>

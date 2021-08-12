@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import './App.css';
 import axios from 'axios';
-import Upload from '../assets/images/upload.png';
 import styles from './mystyle.module.css'; 
 
 interface UploadState {
@@ -46,7 +45,7 @@ class UploadPage extends PureComponent<{}, UploadState> {
 
         axios.post('http://localhost:9890/', formData)
             .then((response) => {
-                response.data.success ? alert('File successfully uploaded') : alert('File already exists');
+                response.data.success ? alert('File successfully uploaded') : alert(response.data.message);
                 this.fetchRecent();
             })
             .catch(err => alert('Error: ' + err));
