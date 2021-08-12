@@ -57,6 +57,7 @@
   border-style: solid;
   border-color: red;
   border-width: 1px;
+  padding-top: 3px;
 }
 
 .ListImage__Delete:hover {

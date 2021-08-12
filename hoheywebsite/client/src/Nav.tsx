@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
-import Hohey from './icon.png';
+import Hohey from './Images/icon.png';
 
 function Nav() {
   return (
