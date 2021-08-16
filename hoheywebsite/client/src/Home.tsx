@@ -34,12 +34,10 @@ function Home() {
         <h1>Metamask</h1>
         <div>Account: {account}</div>
         <Message warning>Metamask is not connected</Message>
-        <Button 
-          color="blue"
+        <button
+        className ="button"
           onClick={() => onClickConnect()}
-          disabled={pending}
-          loading={pending}
-        >Connect to Metamask</Button>
+        >Connect to Metamask</button>
       </div>
     </div>
   );

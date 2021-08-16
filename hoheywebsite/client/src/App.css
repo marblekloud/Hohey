@@ -32,7 +32,7 @@
 /* Style the links inside the navigation bar */
 .topnav a {
   float: left;
-  color: #303030;
+  color: #4c4c4c;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -81,4 +81,29 @@
   max-width: 30px;
   margin-bottom: 10px;
   margin-top: 10px;
+}
+
+.button {
+  display: block;
+  font-size: 15px;
+  margin: 10px auto;
+  cursor: pointer;
+  background-color: white;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #6f00ff;
+  color: #6f00ff;
+  padding: 11px 11px 11px 11px;
+  border-width: 2px;
+}
+
+.button:hover {
+  display: block;
+  font-size: 15px;
+  margin: 10px auto;
+  cursor: pointer;
+  border-color: #6f00ff;
+  color: white;
+  background-color: #6f00ff;
+  transition: 0.1s;
 }

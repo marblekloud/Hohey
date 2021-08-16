@@ -77,3 +77,53 @@
   text-align: center;
   font-size: 30px;
 }
+
+.Upload_Title {
+  font-weight: 700;
+  text-transform: uppercase;
+  opacity: 0.6;
+  text-align: center;
+}
+
+.CaptionBox {
+  margin-right: 40px;
+}
+
+.ImageBox__Caption {
+  font-size: 18px;
+  width: fit-content;
+}
+
+.Upload__InputSection {
+  display: block;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.Upload__Button {
+  display: block;
+  font-size: 15px;
+  margin: 10px auto;
+  cursor: pointer;
+  background-color: white;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #6f00ff;
+  color: #6f00ff;
+  padding: 5px 5px 5px 5px;
+}
+
+.Upload__Button:hover {
+  display: block;
+  font-size: 15px;
+  margin: 10px auto;
+  cursor: pointer;
+  border-color: #6f00ff;
+  color: white;
+  background-color: #6f00ff;
+  transition: 0.2s;
+}
+
+.Upload__Caption {
+  margin-right: 10px;
+}

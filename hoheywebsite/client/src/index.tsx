@@ -22,7 +22,6 @@ ReactDOM.render(
         <Route path="/connectwallet" component={Home} />
         <Route path="/upload" component={UploadPage} />
         <Route path="/" component={ListPage} />
-        
         </Switch>
       <Web3Updater />
     </Web3Provider>

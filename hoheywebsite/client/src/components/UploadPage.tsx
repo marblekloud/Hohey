@@ -57,26 +57,28 @@ class UploadPage extends PureComponent<{}, UploadState> {
                 <div className={styles.Recent}>
                     <p className={styles.Recent_Title}>Recently uploaded file</p>
                     <div className={styles.ImageBox}>
-                        <div className="CaptionBox">
-                            <p className="ImageBox__Caption">Caption</p>
-                            <span className="ImageBox__CaptionValue">{this.state.recentImage.caption}</span>
-                        </div>
+                        <div className={styles.CaptionBox}>
+                            <p className={styles.ImageBox__Caption}>{this.state.recentImage.caption}</p>
+                        
 
                         <video src={'http://localhost:9890/image/' + this.state.recentImage.filename}  width = "320" height = "240" controls>
                         </video>
+                        </div>
                     </div>
                 </div>
 
                 <div className={styles.Recent}>
-                    <p className="Upload__Title">Upload Video</p>
-                    <div className="Upload__InputSection">
+                    <p className={styles.Upload_Title}>Upload Video</p>
+                    <div className={styles.Upload__InputSection}>
+                        <div>
                         <input
                             type="text"
-                            className="Upload__Caption"
-                            placeholder="Enter caption..."
+                            className={styles.Upload__Caption}
+                            placeholder="Enter video title..."
                             onChange={event => this.setState({ caption: event.target.value })}
                             value={this.state.caption}
                         />
+                        </div>
                         <input
                             type="file"
                             className="Upload__Input"
@@ -89,7 +91,7 @@ class UploadPage extends PureComponent<{}, UploadState> {
                         />
                     </div>
 
-                    <button onClick={this.uploadImage} className="Upload__Button">Upload</button>
+                    <button onClick={this.uploadImage} className={styles.Upload__Button}>Upload</button>
                 </div>
             </div>
         );
