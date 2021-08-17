@@ -1,5 +1,6 @@
 # Running hoheywebsite
 
+- Add mongoURI to `config.js` in server folder
 - `npm install` in client folder
 - `npm install` in server folder
 - `npm run start` in server folder

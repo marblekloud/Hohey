@@ -2,10 +2,11 @@ const express = require('express');
 const imageRouter = express.Router();
 const mongoose = require('mongoose');
 const Image = require('../models/image');
+const config = require('../config');
 const { getVideoDurationInSeconds } = require('get-video-duration')
 
 module.exports = (upload) => {
-    const url = "mongodb+srv://b00bies69:HHnSGNoUG7RN65CT@hohey.lgmt6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+    const url = config.mongoURI;
     const connect = mongoose.createConnection(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
     let gfs;

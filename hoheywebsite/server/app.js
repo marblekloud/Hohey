@@ -8,7 +8,7 @@ const multer = require('multer');
 const {GridFsStorage} = require('multer-gridfs-storage');
 const crypto = require('crypto');
 const cors = require('cors');
-
+const config = require('./config');
 const imageRouter = require('./routes/image');
 
 const app = express();
@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
-const url = "mongodb+srv://b00bies69:HHnSGNoUG7RN65CT@hohey.lgmt6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const url = config.mongoURI;
 const connect = mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // connect to the database
@@ -40,7 +40,7 @@ connect.then(() => {
 
 // create storage engine
 const storage = new GridFsStorage({
-    url: "mongodb+srv://b00bies69:HHnSGNoUG7RN65CT@hohey.lgmt6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    url: config.mongoURI,
     file: (req, file) => {
         return new Promise((resolve, reject) => {
             crypto.randomBytes(16, (err, buf) => {
