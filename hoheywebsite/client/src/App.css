@@ -107,3 +107,15 @@
   background-color: #6f00ff;
   transition: 0.1s;
 }
+
+.button:disabled {
+  display: block;
+  font-size: 15px;
+  margin: 10px auto;
+  cursor: pointer;
+  border-color: #ae71ff;
+  color: rgb(246, 237, 255);
+  background-color: #ae71ff;
+  transition: 0.1s;
+  pointer-events: none;
+}

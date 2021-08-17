@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
 .listpage {
   display: flex;
   justify-content: center;
@@ -126,4 +128,47 @@
 
 .Upload__Caption {
   margin-right: 10px;
+}
+
+.bannerheading {
+  font-size: 68px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  font-weight: bold;
+  font-family: "Lato", sans-serif;
+}
+
+.bannercontents {
+  font-size: 28px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+}
+
+.banner {
+  position: relative;
+  height: 350px;
+  width: 100%;
+}
+.banner:before {
+  background-image: url("humaaan.png");
+  width: 100%;
+  height: 350px;
+  background-position: center;
+  content: " ";
+  display: block;
+  position: absolute;
+  opacity: 0.4;
+  background-size: cover;
+}
+
+.bannercontainer {
+  width: 70%;
+  margin: auto;
+  vertical-align: middle;
+  position: relative;
+}
+.bannercontainerreal {
+  width: 70%;
+  margin: auto;
+  vertical-align: middle;
 }

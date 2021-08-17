@@ -37,10 +37,21 @@ class ListPage extends PureComponent<{}, ListState> {
 
     render() {
         return (
+            <div>
+            <div className={styles.banner}>
+                <br/>
+            <div className={styles.bannercontainer}>
+                <div className={styles.bannercontainerreal}>
+                <p className={styles.bannerheading}>HoHey</p>
+                <p className={styles.bannercontents}>HoHey is where your film assets are preserved, displayed, and celebrated - all the while you earn passive income.</p>
+                </div>
+            </div>
+            </div>
             <div className="ListPage">
                 <div className={styles.listpage}>
                     {this.state.imageList.map((file) => (
                         <div className={styles.ListImage}>
+                            <a href={'http://localhost:9890/video/' + file.filename}>Video link</a>
                             <p className={styles.ImageBox__Caption}>{file.caption}</p>
                             <p className="ListImage__Date">Date: {file.createdAt}</p>
                             <video src={'http://localhost:9890/image/' + file.filename}
@@ -50,6 +61,7 @@ class ListPage extends PureComponent<{}, ListState> {
                         </div>
                     ))}
                 </div>
+            </div>
             </div>
         );
     }

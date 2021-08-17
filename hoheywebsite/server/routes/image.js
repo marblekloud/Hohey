@@ -194,6 +194,20 @@ module.exports = (upload) => {
             });
         });
 
+    imageRouter.route('/video/:filename')
+    .get((req, res, next) => {
+        gfs.find({ filename: req.params.filename }).toArray((err, files) => {
+            if (!files[0] || files.length === 0) {
+                return res.status(200).json({
+                    success: false,
+                    message: 'No files available',
+                });
+            }
+            gfs.openDownloadStreamByName(req.params.filename).pipe(res);
+
+        });
+    });
+
     /*
         DELETE: Delete a particular file by an ID
     */
