@@ -52,7 +52,7 @@ module.exports = (upload) => {
                                     return res.status(200).json({
                                         success: false,
                                         image,
-                                        message: duration,
+                                        message: 'File successfully uploaded, video duration is ' + duration + ' seconds',
                                     });
                                   })
                             });
