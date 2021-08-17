@@ -39,7 +39,7 @@ function Home() {
       <div className="App-header">
         <br/>
         <h1>{message}</h1>
-        <div>Account: {account}</div>
+        <p className = "address">Account address: {account}</p>
         <button
         disabled={buttonstate}
         className ="button"

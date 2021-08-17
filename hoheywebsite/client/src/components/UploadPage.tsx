@@ -55,19 +55,6 @@ class UploadPage extends PureComponent<{}, UploadState> {
         return (
             <div className={styles.UploadPage}>
                 <div className={styles.Recent}>
-                    <p className={styles.Recent_Title}>Recently uploaded file</p>
-                    <div className={styles.ImageBox}>
-                        <div className={styles.CaptionBox}>
-                            <p className={styles.ImageBox__Caption}>{this.state.recentImage.caption}</p>
-                        
-
-                        <video src={'http://localhost:9890/image/' + this.state.recentImage.filename}  width = "320" height = "240" controls>
-                        </video>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={styles.Recent}>
                     <p className={styles.Upload_Title}>Upload Video</p>
                     <div className={styles.Upload__InputSection}>
                         <div>
