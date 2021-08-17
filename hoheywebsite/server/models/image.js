@@ -15,7 +15,7 @@ const ImageSchema = new Schema({
         type: String,
     },
     createdAt: {
-        default: Date.now(),
+        default: () => new Date(+new Date() + 8*60*60*1000),
         type: Date,
     },
 });

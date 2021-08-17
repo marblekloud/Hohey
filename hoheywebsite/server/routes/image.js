@@ -2,6 +2,7 @@ const express = require('express');
 const imageRouter = express.Router();
 const mongoose = require('mongoose');
 const Image = require('../models/image');
+const { getVideoDurationInSeconds } = require('get-video-duration')
 
 module.exports = (upload) => {
     const url = "mongodb+srv://b00bies69:HHnSGNoUG7RN65CT@hohey.lgmt6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -21,6 +22,7 @@ module.exports = (upload) => {
     */
     imageRouter.route('/')
         .post(upload.single('file'), (req, res, next) => {
+
             console.log(req.body);
             // check for existing images
             Image.findOne({ caption: req.body.caption })
@@ -33,6 +35,8 @@ module.exports = (upload) => {
                         fileId: req.file.id,
                     });
                     
+                    
+
                     if (req.file.filename.slice(-4) !== '.mp4' && req.file.filename.slice(-5) !== '.webm' && req.file.filename.slice(-4) !== '.ogg' ) {
                         return res.status(200).json({
                             success: false,
@@ -43,13 +47,19 @@ module.exports = (upload) => {
                         newImage.save()
                         .then((image) => {
 
-                            res.status(200).json({
-                                success: true,
-                                image,
+                            gfs.find({ filename: req.file.filename }).toArray((err, files) => {
+                                getVideoDurationInSeconds(gfs.openDownloadStreamByName(req.file.filename)).then((duration) => {
+                                    return res.status(200).json({
+                                        success: false,
+                                        image,
+                                        message: duration,
+                                    });
+                                  })
                             });
                         })
                         .catch(err => res.status(500).json(err));
 
+                       
                     }
 
                     
@@ -179,10 +189,8 @@ module.exports = (upload) => {
                         message: 'No files available',
                     });
                 }
+                gfs.openDownloadStreamByName(req.params.filename).pipe(res);
 
-                    // render image to browser
-                    gfs.openDownloadStreamByName(req.params.filename).pipe(res);
-   
             });
         });
 
