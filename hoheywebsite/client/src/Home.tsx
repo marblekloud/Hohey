@@ -7,7 +7,7 @@ import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
 function Home() {
-  const [message, setMessage] = React.useState('Connect with one of our available providers or create a new one.');
+  const [message, setMessage] = React.useState('Connect with your MetaMask wallet or create a new one.');
 
   const {
     state: { account },
@@ -27,7 +27,7 @@ function Home() {
       window.location.href = "https://metamask.io/download.html";
     }
     if (data) {
-      setMessage('Metamask is connected');
+      setMessage('MetaMask is connected');
       updateAccount(data);
       changebuttonstate(true);
     }

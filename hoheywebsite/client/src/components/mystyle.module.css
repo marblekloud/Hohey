@@ -6,6 +6,8 @@
   flex-wrap: wrap;
 }
 
+.videoplayer {
+}
 .ListImage {
   width: fit-content;
   margin: 10px;
@@ -20,7 +22,8 @@
 }
 
 .Recent {
-  width: 50%;
+  display: flex;
+  justify-content: center;
 }
 .Upload {
   width: 50%;

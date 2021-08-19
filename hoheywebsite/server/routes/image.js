@@ -51,7 +51,7 @@ module.exports = (upload) => {
                             gfs.find({ filename: req.file.filename }).toArray((err, files) => {
                                 getVideoDurationInSeconds(gfs.openDownloadStreamByName(req.file.filename)).then((duration) => {
                                     return res.status(200).json({
-                                        success: false,
+                                        success: true,
                                         image,
                                         message: 'File successfully uploaded, video duration is ' + duration + ' seconds',
                                     });
@@ -77,7 +77,6 @@ module.exports = (upload) => {
                 })
                 .catch(err => res.status(500).json(err));
         });
-
     /*
         GET: Delete an image from the collection
     */
@@ -194,20 +193,6 @@ module.exports = (upload) => {
 
             });
         });
-
-    imageRouter.route('/video/:filename')
-    .get((req, res, next) => {
-        gfs.find({ filename: req.params.filename }).toArray((err, files) => {
-            if (!files[0] || files.length === 0) {
-                return res.status(200).json({
-                    success: false,
-                    message: 'No files available',
-                });
-            }
-            gfs.openDownloadStreamByName(req.params.filename).pipe(res);
-
-        });
-    });
 
     /*
         DELETE: Delete a particular file by an ID
