@@ -28,7 +28,7 @@ class ListPage extends PureComponent<{}, ListState> {
         axios.get('http://localhost:9890/delete/' + id) 
             .then((response) => {
                 if (response.data.success) {
-                    alert('File with ID: ' + id + ' has been deleted');
+                    alert('Video with ID: ' + id + ' has been deleted');
                     this.setState({ imageList: this.state.imageList.filter(el => el._id !== id)});
                 }
             })
@@ -51,14 +51,13 @@ class ListPage extends PureComponent<{}, ListState> {
                 <div className={styles.listpage}>
                     {this.state.imageList.map((file) => (
                         <div className={styles.ListImage}>
-                            
+                            <a href={'http://localhost:3000/video/' + file.filename}>
+                                <img src={'http://localhost:9890/image/' + file.filename}
+                                className="ListImage__Image"  width = "320" height = "180" >
+                                </img>
+                            </a>
                             <p className={styles.ImageBox__Caption}>{file.caption}</p>
                             <p className="ListImage__Date">Date: {file.createdAt}</p>
-                            <a href={'http://localhost:3000/video/' + file.filename}>
-                            <video src={'http://localhost:9890/image/' + file.filename}
-                                className="ListImage__Image"  width = "320" height = "240" controls>
-                        </video>
-                        </a>
                             <button className={styles.ListImage__Delete} onClick={() => this.deleteFile(file._id)}>Delete</button>
                         </div>
                     ))}

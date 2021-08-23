@@ -37,8 +37,13 @@ class UploadPage extends PureComponent<{}, UploadState> {
     }
 
     uploadImage = () => {
-        if (!this.state.caption.trim() || !this.state.uploadedImage.name) {
-            return alert('Caption or file is missing');
+
+        if (!this.state.uploadedImage.name) {
+            return alert('Video is missing');
+        } else if (!this.state.caption.trim()) {
+            return alert('Video title is missing');
+        } else if (!this.state.description.trim()) {
+            return alert('Video description is missing');
         }
 
         let formData = new FormData();
@@ -48,7 +53,7 @@ class UploadPage extends PureComponent<{}, UploadState> {
 
         axios.post('http://localhost:9890/', formData)
             .then((response) => {
-                response.data.success ? alert('File successfully uploaded') : alert(response.data.message);
+                response.data.success ? alert(response.data.message) : alert(response.data.message);
                 this.fetchRecent();
             })
             .catch(err => alert('Error: ' + err));
@@ -57,7 +62,6 @@ class UploadPage extends PureComponent<{}, UploadState> {
     render() {
         return (
             <div className={styles.UploadPage}>
-                <div className={styles.Recent}>
                     <p className={styles.Upload_Title}>Upload Video</p>
                     <div className={styles.Upload__InputSection}>
                         <div>
@@ -68,14 +72,17 @@ class UploadPage extends PureComponent<{}, UploadState> {
                             onChange={event => this.setState({ caption: event.target.value })}
                             value={this.state.caption}
                         />
-                        <input
-                            type="text"
-                            className={styles.Upload__Caption}
+                        </div>
+                        <br/>
+                        <div>
+                        <textarea
+                            className={styles.Upload__Description}
                             placeholder="Enter video description..."
                             onChange={event => this.setState({ description: event.target.value })}
                             value={this.state.description}
-                        />
+                        ></textarea>
                         </div>
+                        <br/>
                         <input
                             type="file"
                             className="Upload__Input"
@@ -89,7 +96,6 @@ class UploadPage extends PureComponent<{}, UploadState> {
                     </div>
 
                     <button onClick={this.uploadImage} className={styles.Upload__Button}>Upload</button>
-                </div>
             </div>
         );
     }

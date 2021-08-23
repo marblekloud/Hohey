@@ -17,14 +17,13 @@
 }
 
 .UploadPage {
-  display: flex;
   width: 100%;
 }
 
 .Recent {
-  width: 57%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 65%;
+  float: left;
+  margin-left: 3%;
 }
 .Upload {
   width: 50%;
@@ -76,8 +75,7 @@
 
 .Upload_Title {
   font-weight: 700;
-  text-transform: uppercase;
-  opacity: 0.6;
+  font-size: 30px;
   text-align: center;
 }
 
@@ -98,7 +96,7 @@
 
 .Upload__Button {
   display: block;
-  font-size: 15px;
+  font-size: 17px;
   margin: 10px auto;
   cursor: pointer;
   background-color: white;
@@ -106,22 +104,18 @@
   border-radius: 5px;
   border-color: #6f00ff;
   color: #6f00ff;
-  padding: 5px 5px 5px 5px;
+  padding: 10px 12px 10px 12px;
 }
 
 .Upload__Button:hover {
   display: block;
-  font-size: 15px;
+  font-size: 17px;
   margin: 10px auto;
   cursor: pointer;
   border-color: #6f00ff;
   color: white;
   background-color: #6f00ff;
   transition: 0.2s;
-}
-
-.Upload__Caption {
-  margin-right: 10px;
 }
 
 .bannerheading {
@@ -169,6 +163,41 @@
 
 .videoTitle {
   padding-right: 3%;
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
+}
+
+.videoDescription {
+  font-size: 15px;
+}
+
+.videolist {
+  margin-left: 4%;
+  float: left;
+  width: 10%;
+}
+
+.Date {
+  margin-right: 10px;
+}
+
+.Upload__Caption {
+  font-size: 18px;
+  line-height: 30px;
+  width: 400px;
+  border-style: solid;
+  border-color: rgb(150, 150, 150);
+  border-radius: 3px;
+}
+
+.Upload__Description {
+  display: inline-block;
+  width: 400px;
+  font-size: 18px;
+  border-style: solid;
+  border-color: rgb(150, 150, 150);
+  border-radius: 3px;
+  height: 150px;
+  line-height: 25px;
+  resize: none;
 }

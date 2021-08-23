@@ -46,7 +46,6 @@ module.exports = (upload) => {
                     else {
                         newImage.save()
                         .then((image) => {
-
                             gfs.find({ filename: req.file.filename }).toArray((err, files) => {
                                 getVideoDurationInSeconds(gfs.openDownloadStreamByName(req.file.filename)).then((duration) => {
                                     return res.status(200).json({
@@ -89,14 +88,14 @@ module.exports = (upload) => {
                             .then(() => {
                                 return res.status(200).json({
                                     success: true,
-                                    message: `File with ID: ${req.params.id} deleted`,
+                                    message: `Video with ID: ${req.params.id} deleted`,
                                 });
                             })
                             .catch(err => { return res.status(500).json(err) });
                     } else {
                         res.status(200).json({
                             success: false,
-                            message: `File with ID: ${req.params.id} not found`,
+                            message: `Video with ID: ${req.params.id} not found`,
                         });
                     }
                 })
