@@ -15,16 +15,11 @@ import {
 import axios from 'axios';
 import { FilledInput } from '@material-ui/core';
 
-var videos:any[] = [{id: '',caption: '',filename: '',fileId: '',createdAt: '',__v: ''},];
+var videos:any[] = [{filename: ''},];
 axios.get('http://localhost:9890/')
   .then((response) => {
     videos.push({
-      id: response.data.images.id,
-      caption: response.data.images.caption,
       filename:response.data.images.filename,
-      fileId:response.data.images.fileId,
-      createdAt:response.data.images.createdAt,
-      __v:response.data.images.__v,
     })
   })
   .catch(err => alert(err));
@@ -35,9 +30,7 @@ ReactDOM.render(
     <Web3Provider>
       <Nav />
       <Switch>
-      {videos.map(video => (
-        <Route path={'/video/' + video.filename} component={VideoPage} />
-      ))}
+      {videos.map(video => (<Route path={'/video/' + video.filename} component={VideoPage} />))}
         <Route path="/connectwallet" component={Home} />
         <Route path="/upload" component={UploadPage} />
         <Route path="/" component={ListPage} />

@@ -32,12 +32,11 @@ module.exports = (upload) => {
 
                     let newImage = new Image({
                         caption: req.body.caption,
+                        description: req.body.description,
                         filename: req.file.filename,
                         fileId: req.file.id,
                     });
                     
-                    
-
                     if (req.file.filename.slice(-4) !== '.mp4' && req.file.filename.slice(-5) !== '.webm' && req.file.filename.slice(-4) !== '.ogg' ) {
                         return res.status(200).json({
                             success: false,
@@ -77,6 +76,7 @@ module.exports = (upload) => {
                 })
                 .catch(err => res.status(500).json(err));
         });
+    
     /*
         GET: Delete an image from the collection
     */
@@ -118,6 +118,18 @@ module.exports = (upload) => {
                 .catch(err => res.status(500).json(err));
         });
 
+    imageRouter.route('/video/:filename')
+        .get((req, res, next) => {
+            Image.findOne({ filename: req.params.filename })
+                .then((image) => {
+                    res.status(200).json({
+                        success: true,
+                        image,
+                    });
+                })
+                .catch(err => res.status(500).json(err));
+        });
+        
     /*
         POST: Upload multiple files upto 3
     */

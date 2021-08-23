@@ -6,6 +6,7 @@ import styles from './mystyle.module.css';
 interface UploadState {
     recentImage: any;
     caption: string;
+    description:string;
     uploadedImageUrl: string;
     uploadedImage: any;
 };
@@ -17,6 +18,7 @@ class UploadPage extends PureComponent<{}, UploadState> {
         this.state = {
             recentImage: {},
             caption: '',
+            description: '',
             uploadedImageUrl: '',
             uploadedImage: {},
         };
@@ -41,6 +43,7 @@ class UploadPage extends PureComponent<{}, UploadState> {
 
         let formData = new FormData();
         formData.append('caption', this.state.caption);
+        formData.append('description', this.state.description);
         formData.append('file', this.state.uploadedImage);
 
         axios.post('http://localhost:9890/', formData)
@@ -64,6 +67,13 @@ class UploadPage extends PureComponent<{}, UploadState> {
                             placeholder="Enter video title..."
                             onChange={event => this.setState({ caption: event.target.value })}
                             value={this.state.caption}
+                        />
+                        <input
+                            type="text"
+                            className={styles.Upload__Caption}
+                            placeholder="Enter video description..."
+                            onChange={event => this.setState({ description: event.target.value })}
+                            value={this.state.description}
                         />
                         </div>
                         <input
