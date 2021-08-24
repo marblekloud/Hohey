@@ -48,6 +48,7 @@ module.exports = (upload) => {
                         .then((image) => {
                             gfs.find({ filename: req.file.filename }).toArray((err, files) => {
                                 getVideoDurationInSeconds(gfs.openDownloadStreamByName(req.file.filename)).then((duration) => {
+                                    var Mairewarded = duration * 100;
                                     return res.status(200).json({
                                         success: true,
                                         image,

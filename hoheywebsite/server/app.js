@@ -10,6 +10,7 @@ const crypto = require('crypto');
 const cors = require('cors');
 const config = require('./config');
 const imageRouter = require('./routes/image');
+const userRouter = require('./routes/user');
 
 const app = express();
 
@@ -61,6 +62,8 @@ const storage = new GridFsStorage({
 const upload = multer({ storage });
 
 app.use('/', imageRouter(upload));
+
+app.use('/', userRouter(upload));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

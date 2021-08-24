@@ -13,7 +13,6 @@ import {
   Updater as Web3Updater,
 } from "./contexts/Web3";
 import axios from 'axios';
-import { FilledInput } from '@material-ui/core';
 
 var videos:any[] = [{filename: ''},];
 axios.get('http://localhost:9890/')

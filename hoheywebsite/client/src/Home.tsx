@@ -1,13 +1,25 @@
-import React from "react";
-import { useState } from "react";
+import React, { PureComponent } from "react";
+import { useState, useEffect }from "react";
 import useAsync from "./components/useAsync";
 import { unlockAccount } from "./api/web3";
 import { useWeb3Context } from "./contexts/Web3";
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
+import axios from 'axios';
 
-function Home() {
-  const [message, setMessage] = React.useState('Connect with your MetaMask wallet or create a new one.');
+function Home()  {
+
+  function changeMessage(_message:any){
+
+    let formData = new FormData();
+      formData.append('MMaccount', _message);
+
+      axios.post('http://localhost:9890/user', formData)
+        .then((response) => {
+            response.data.success ? alert(response.data.message) : alert(response.data.message);
+        })
+        .catch(err => alert('Error: ' + err));
+  }
 
   const {
     state: { account },
@@ -17,7 +29,6 @@ function Home() {
   
   const { pending, error, call } = useAsync(unlockAccount);
   
-  const [buttonstate, changebuttonstate] = React.useState(false);
 
   async function onClickConnect() {
     const { error, data } = await call(null);
@@ -27,27 +38,23 @@ function Home() {
       window.location.href = "https://metamask.io/download.html";
     }
     if (data) {
-      setMessage('MetaMask is connected');
       updateAccount(data);
-      changebuttonstate(true);
+      changeMessage({account});
     }
   }
   
-
   return (
-    <div className="App">
-      <div className="App-header">
-        <br/>
-        <h1>{message}</h1>
-        <p className = "address">Account address: {account}</p>
-        <button
-        disabled={buttonstate}
-        className ="button"
-          onClick={() => onClickConnect()}
-        >Connect to Metamask</button>
+      <div className="App">
+        <div className="App-header">
+          <br/> 
+          <p onChange={() => changeMessage({account})}  className = "address">Account address: {account}</p>
+          <button
+          className ="button"
+            onClick={() => onClickConnect()}
+          >Connect to Metamask</button>
+        </div>
       </div>
-    </div>
-  );
+    );
 }
 
 export default Home;
