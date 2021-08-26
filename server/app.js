@@ -65,11 +65,15 @@ app.use('/api/', imageRouter(upload));
 
 app.use('/api/', userRouter(upload));
 
+app.use(function(req, res) {
+	res.sendFile(path.join(__dirname, '../client/src/index.tsx'));
+});
+app.use(express.static('client/build'));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

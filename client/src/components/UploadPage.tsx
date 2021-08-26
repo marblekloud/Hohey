@@ -29,7 +29,7 @@ class UploadPage extends PureComponent<{}, UploadState> {
     }
 
     fetchRecent = () => {
-        axios.get('http://localhost:9890/recent')
+        axios.get('/api/recent/')
             .then((response) => {
                 this.setState({ recentImage: response.data.image });
             })
@@ -51,7 +51,7 @@ class UploadPage extends PureComponent<{}, UploadState> {
         formData.append('description', this.state.description);
         formData.append('file', this.state.uploadedImage);
 
-        axios.post('http://localhost:9890/', formData)
+        axios.post('/api/', formData)
             .then((response) => {
                 response.data.success ? alert(response.data.message) : alert(response.data.message);
                 this.fetchRecent();
