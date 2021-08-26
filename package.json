@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "start": "(cd client; npm start) & (cd server;  npm start)"
+        "start": "(cd client/build; serve -s .) & (cd server; npm start)"
     },
     "dependencies": {
         "heroku": "^7.59.0"
