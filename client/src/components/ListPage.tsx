@@ -17,7 +17,7 @@ class ListPage extends PureComponent<{}, ListState> {
     }
 
     componentDidMount = () => {
-        axios.get('/api/')
+        axios.get('http://localhost:9890/')
             .then(response => {
                 this.setState({ imageList: response.data.images });
             })
@@ -25,7 +25,7 @@ class ListPage extends PureComponent<{}, ListState> {
     }
 
     deleteFile = (id: any) => {
-        axios.get('/api/delete/' + id) 
+        axios.get('http://localhost:9890/delete/' + id) 
             .then((response) => {
                 if (response.data.success) {
                     alert('Video with ID: ' + id + ' has been deleted');
@@ -51,8 +51,8 @@ class ListPage extends PureComponent<{}, ListState> {
                 <div className={styles.listpage}>
                     {this.state.imageList.map((file) => (
                         <div className={styles.ListImage}>
-                            <a href={'/video/' + file.filename}>
-                                <img src={'/api/image/' + file.filename}
+                            <a href={'http://localhost:3000/video/' + file.filename}>
+                                <img src={'http://localhost:9890/image/' + file.filename}
                                 className="ListImage__Image"  width = "320" height = "180" >
                                 </img>
                             </a>

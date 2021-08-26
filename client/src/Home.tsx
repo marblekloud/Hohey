@@ -14,7 +14,7 @@ function Home()  {
     let formData = new FormData();
       formData.append('MMaccount', _message);
 
-      axios.post('/api/user/', formData)
+      axios.post('http://localhost:9890/user', formData)
         .then((response) => {
             response.data.success ? alert(response.data.message) : alert(response.data.message);
         })
