@@ -1,20 +1,25 @@
 import React from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
+import Hohey from './Images/icon.png';
 
 function Nav() {
   return (
     <> 
       <div className="topnav">
-        <Link to="/">
+        <img className = "icon" src = {Hohey} alt = "Hohey"/>
+        <li className = "list"><Link to="/">
           Home
         </Link>
-        <Link to="/upload">
-          Upload Video
+        </li>
+        <li className = "list"><Link to="/upload">
+          Upload video
         </Link>
-        <Link to="/videos">
-          Video list
+        </li>
+        <li className = "listright"><Link to="/connectwallet">
+          Connect wallet
         </Link>
+        </li>
      </div>
     </>
   );

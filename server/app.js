@@ -5,24 +5,21 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const methodOverride = require('method-override');
 const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
+const {GridFsStorage} = require('multer-gridfs-storage');
 const crypto = require('crypto');
 const cors = require('cors');
-
+const config = require('./config');
 const imageRouter = require('./routes/image');
+const userRouter = require('./routes/user');
 
 const app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
 app.use(cors({
     origin: '*',
 }));
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -30,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
-const url = "mongodb+srv://b00bies69:HHnSGNoUG7RN65CT@hohey.lgmt6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const url = config.mongoURI;
 const connect = mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // connect to the database
@@ -44,7 +41,7 @@ connect.then(() => {
 
 // create storage engine
 const storage = new GridFsStorage({
-    url: "mongodb+srv://b00bies69:HHnSGNoUG7RN65CT@hohey.lgmt6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    url: config.mongoURI,
     file: (req, file) => {
         return new Promise((resolve, reject) => {
             crypto.randomBytes(16, (err, buf) => {
@@ -64,7 +61,9 @@ const storage = new GridFsStorage({
 
 const upload = multer({ storage });
 
-app.use('/', imageRouter(upload));
+app.use('/api/', imageRouter(upload));
+
+app.use('/api/', userRouter(upload));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

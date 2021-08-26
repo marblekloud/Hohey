@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import './App.css';
 import axios from 'axios';
+import styles from './mystyle.module.css'; 
 
 interface ListState {
     imageList: any[];
@@ -27,7 +28,7 @@ class ListPage extends PureComponent<{}, ListState> {
         axios.get('http://localhost:9890/delete/' + id) 
             .then((response) => {
                 if (response.data.success) {
-                    alert('File with ID: ' + id + ' has been deleted');
+                    alert('Video with ID: ' + id + ' has been deleted');
                     this.setState({ imageList: this.state.imageList.filter(el => el._id !== id)});
                 }
             })
@@ -36,24 +37,32 @@ class ListPage extends PureComponent<{}, ListState> {
 
     render() {
         return (
+            <div>
+            <div className={styles.banner}>
+                <br/>
+            <div className={styles.bannercontainer}>
+                <div className={styles.bannercontainerreal}>
+                <p className={styles.bannerheading}>HoHey</p>
+                <p className={styles.bannercontents}>HoHey is where your film assets are preserved, displayed, and celebrated - all the while you earn passive income.</p>
+                </div>
+            </div>
+            </div>
             <div className="ListPage">
-                <p className="ListPage__Title">List of Files/Images</p>
-
-                <div className="ListImageContainer">
+                <div className={styles.listpage}>
                     {this.state.imageList.map((file) => (
-                        <div className="ListImage">
-                            <p className="ListImage__Caption">{file.caption}</p>
-                            <p className="ListImage__Date">{file.createdAt}</p>
-                            <img
-                                src={'http://localhost:9890/image/' + file.filename}
-                                alt="list-image"
-                                className="ListImage__Image"
-                            />
-
-                            <button className="ListImage__Delete" onClick={() => this.deleteFile(file._id)}>Delete</button>
+                        <div className={styles.ListImage}>
+                            <a href={'http://localhost:3000/video/' + file.filename}>
+                                <img src={'http://localhost:9890/image/' + file.filename}
+                                className="ListImage__Image"  width = "320" height = "180" >
+                                </img>
+                            </a>
+                            <p className={styles.ImageBox__Caption}>{file.caption}</p>
+                            <p className="ListImage__Date">Date: {file.createdAt}</p>
+                            <button className={styles.ListImage__Delete} onClick={() => this.deleteFile(file._id)}>Delete</button>
                         </div>
                     ))}
                 </div>
+            </div>
             </div>
         );
     }

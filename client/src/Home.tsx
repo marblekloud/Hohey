@@ -1,48 +1,60 @@
-import React from "react";
-import { useState } from "react";
+import React, { PureComponent } from "react";
+import { useState, useEffect }from "react";
 import useAsync from "./components/useAsync";
-import { Input, Message, Button } from "semantic-ui-react";
 import { unlockAccount } from "./api/web3";
 import { useWeb3Context } from "./contexts/Web3";
 import 'semantic-ui-css/semantic.min.css';
-import Axios from 'axios';
 import './App.css';
+import axios from 'axios';
 
-function Home() {
+function Home()  {
+
+  function changeMessage(_message:any){
+
+    let formData = new FormData();
+      formData.append('MMaccount', _message);
+
+      axios.post('http://localhost:9890/user', formData)
+        .then((response) => {
+            response.data.success ? alert(response.data.message) : alert(response.data.message);
+        })
+        .catch(err => alert('Error: ' + err));
+  }
 
   const {
     state: { account },
     updateAccount
   } = useWeb3Context();
   
+  
   const { pending, error, call } = useAsync(unlockAccount);
+  
 
   async function onClickConnect() {
     const { error, data } = await call(null);
 
     if (error) {
       console.error(error);
+      window.location.href = "https://metamask.io/download.html";
     }
     if (data) {
-      updateAccount(data)
+      updateAccount(data);
+      changeMessage({account});
     }
   }
-
+  
   return (
-    <div className="App">
-      <div className="App-header">
-        <h1>Metamask</h1>
-        <div>Account: {account}</div>
-        <Message warning>Metamask is not connected</Message>
-        <Button 
-          color="blue"
-          onClick={() => onClickConnect()}
-          disabled={pending}
-          loading={pending}
-        >Connect to Metamask</Button>
+      <div className="App">
+        <div className="App-header">
+          <br/> 
+          <p onChange={() => changeMessage({account})}  className = "address">Account address: {account}</p>
+          <button
+          className ="button"
+            onClick={() => onClickConnect()}
+          >Connect to Metamask</button>
+        </div>
       </div>
-    </div>
-  );
+    );
 }
 
 export default Home;

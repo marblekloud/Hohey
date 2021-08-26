@@ -2,9 +2,11 @@ const express = require('express');
 const imageRouter = express.Router();
 const mongoose = require('mongoose');
 const Image = require('../models/image');
+const config = require('../config');
+const { getVideoDurationInSeconds } = require('get-video-duration')
 
 module.exports = (upload) => {
-    const url = "mongodb+srv://b00bies69:HHnSGNoUG7RN65CT@hohey.lgmt6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+    const url = config.mongoURI;
     const connect = mongoose.createConnection(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
     let gfs;
@@ -21,33 +23,46 @@ module.exports = (upload) => {
     */
     imageRouter.route('/')
         .post(upload.single('file'), (req, res, next) => {
+
             console.log(req.body);
             // check for existing images
             Image.findOne({ caption: req.body.caption })
                 .then((image) => {
                     console.log(image);
-                    if (image) {
-                        return res.status(200).json({
-                            success: false,
-                            message: 'Image already exists',
-                        });
-                    }
 
                     let newImage = new Image({
                         caption: req.body.caption,
+                        description: req.body.description,
                         filename: req.file.filename,
                         fileId: req.file.id,
                     });
-
-                    newImage.save()
+                    
+                    if (req.file.filename.slice(-4) !== '.mp4' && req.file.filename.slice(-5) !== '.webm' && req.file.filename.slice(-4) !== '.ogg' ) {
+                        return res.status(200).json({
+                            success: false,
+                            message: 'Only videos are allowed',
+                        });
+                    }
+                    else {
+                        newImage.save()
                         .then((image) => {
-
-                            res.status(200).json({
-                                success: true,
-                                image,
+                            gfs.find({ filename: req.file.filename }).toArray((err, files) => {
+                                getVideoDurationInSeconds(gfs.openDownloadStreamByName(req.file.filename)).then((duration) => {
+                                    var Mairewarded = duration * 100;
+                                    return res.status(200).json({
+                                        success: true,
+                                        image,
+                                        message: 'File successfully uploaded, video duration is ' + duration + ' seconds',
+                                    });
+                                  })
                             });
                         })
                         .catch(err => res.status(500).json(err));
+
+                       
+                    }
+
+                    
                 })
                 .catch(err => res.status(500).json(err));
         })
@@ -61,7 +76,7 @@ module.exports = (upload) => {
                 })
                 .catch(err => res.status(500).json(err));
         });
-
+    
     /*
         GET: Delete an image from the collection
     */
@@ -74,14 +89,14 @@ module.exports = (upload) => {
                             .then(() => {
                                 return res.status(200).json({
                                     success: true,
-                                    message: `File with ID: ${req.params.id} deleted`,
+                                    message: `Video with ID: ${req.params.id} deleted`,
                                 });
                             })
                             .catch(err => { return res.status(500).json(err) });
                     } else {
                         res.status(200).json({
                             success: false,
-                            message: `File with ID: ${req.params.id} not found`,
+                            message: `Video with ID: ${req.params.id} not found`,
                         });
                     }
                 })
@@ -103,6 +118,18 @@ module.exports = (upload) => {
                 .catch(err => res.status(500).json(err));
         });
 
+    imageRouter.route('/video/:filename')
+        .get((req, res, next) => {
+            Image.findOne({ filename: req.params.filename })
+                .then((image) => {
+                    res.status(200).json({
+                        success: true,
+                        image,
+                    });
+                })
+                .catch(err => res.status(500).json(err));
+        });
+        
     /*
         POST: Upload multiple files upto 3
     */
@@ -128,10 +155,10 @@ module.exports = (upload) => {
                 }
 
                 files.map(file => {
-                    if (file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/svg') {
+                    if (file.contentType === 'video/mp4' || file.contentType === 'video/webm' || file.contentType === 'video/ogg') {
                         file.isImage = true;
                     } else {
-                        file.isImage = true;
+                        file.isImage = false;
                     }
                 });
 
@@ -174,10 +201,8 @@ module.exports = (upload) => {
                         message: 'No files available',
                     });
                 }
+                gfs.openDownloadStreamByName(req.params.filename).pipe(res);
 
-                    // render image to browser
-                    gfs.openDownloadStreamByName(req.params.filename).pipe(res);
-   
             });
         });
 

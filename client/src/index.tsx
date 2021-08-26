@@ -2,28 +2,38 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import UploadPage from './components/UploadPage';
-import Uploads from './Uploads';
+import ListPage from './components/ListPage';
+import VideoPage from './components/VideoPage';
 import Home from './Home';
 import Nav from './Nav';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {
   Provider as Web3Provider,
   Updater as Web3Updater,
 } from "./contexts/Web3";
-import * as serviceWorker from "./serviceWorker";
+import axios from 'axios';
 
+var videos:any[] = [{filename: ''},];
+axios.get('http://localhost:9890/')
+  .then((response) => {
+    videos.push({
+      filename:response.data.images.filename,
+    })
+  })
+  .catch(err => alert(err));
+     
 ReactDOM.render(
   <React.StrictMode>
     <Router>
     <Web3Provider>
       <Nav />
       <Switch>
-        <Route path="/upload" component={Uploads} />
-        <Route path="/videos" component={UploadPage} />
-        <Route path="/" component={Home} />
-      </Switch>
+      {videos.map(video => (<Route path={'/video/' + video.filename} component={VideoPage} />))}
+        <Route path="/connectwallet" component={Home} />
+        <Route path="/upload" component={UploadPage} />
+        <Route path="/" component={ListPage} />
+        </Switch>
       <Web3Updater />
     </Web3Provider>
     </Router>

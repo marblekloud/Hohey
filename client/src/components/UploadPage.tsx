@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import './App.css';
 import axios from 'axios';
-import Upload from '../assets/images/upload.png';
+import styles from './mystyle.module.css'; 
 
 interface UploadState {
     recentImage: any;
     caption: string;
+    description:string;
     uploadedImageUrl: string;
     uploadedImage: any;
 };
@@ -17,6 +18,7 @@ class UploadPage extends PureComponent<{}, UploadState> {
         this.state = {
             recentImage: {},
             caption: '',
+            description: '',
             uploadedImageUrl: '',
             uploadedImage: {},
         };
@@ -35,17 +37,23 @@ class UploadPage extends PureComponent<{}, UploadState> {
     }
 
     uploadImage = () => {
-        if (!this.state.caption.trim() || !this.state.uploadedImage.name) {
-            return alert('Caption or file is missing');
+
+        if (!this.state.uploadedImage.name) {
+            return alert('Video is missing');
+        } else if (!this.state.caption.trim()) {
+            return alert('Video title is missing');
+        } else if (!this.state.description.trim()) {
+            return alert('Video description is missing');
         }
 
         let formData = new FormData();
         formData.append('caption', this.state.caption);
+        formData.append('description', this.state.description);
         formData.append('file', this.state.uploadedImage);
 
         axios.post('http://localhost:9890/', formData)
             .then((response) => {
-                response.data.success ? alert('File successfully uploaded') : alert('File already exists');
+                response.data.success ? alert(response.data.message) : alert(response.data.message);
                 this.fetchRecent();
             })
             .catch(err => alert('Error: ' + err));
@@ -53,30 +61,28 @@ class UploadPage extends PureComponent<{}, UploadState> {
 
     render() {
         return (
-            <div className="UploadPage">
-                <div className="Recent">
-                    <p className="Recent__Title">Recently uploaded file</p>
-                    <div className="ImageBox">
-                        <div className="CaptionBox">
-                            <p className="ImageBox__Caption">Caption</p>
-                            <span className="ImageBox__CaptionValue">{this.state.recentImage.caption}</span>
-                        </div>
-
-                        <video src={'http://localhost:9890/image/' + this.state.recentImage.filename}  width = "320" height = "240" controls>
-                        </video>
-                    </div>
-                </div>
-
-                <div className="Upload">
-                    <p className="Upload__Title">Upload File</p>
-                    <div className="Upload__InputSection">
+            <div className={styles.UploadPage}>
+                    <p className={styles.Upload_Title}>Upload Video</p>
+                    <div className={styles.Upload__InputSection}>
+                        <div>
                         <input
                             type="text"
-                            className="Upload__Caption"
-                            placeholder="Enter caption..."
+                            className={styles.Upload__Caption}
+                            placeholder="Enter video title..."
                             onChange={event => this.setState({ caption: event.target.value })}
                             value={this.state.caption}
                         />
+                        </div>
+                        <br/>
+                        <div>
+                        <textarea
+                            className={styles.Upload__Description}
+                            placeholder="Enter video description..."
+                            onChange={event => this.setState({ description: event.target.value })}
+                            value={this.state.description}
+                        ></textarea>
+                        </div>
+                        <br/>
                         <input
                             type="file"
                             className="Upload__Input"
@@ -89,14 +95,7 @@ class UploadPage extends PureComponent<{}, UploadState> {
                         />
                     </div>
 
-                    <img
-                        src={!this.state.uploadedImageUrl.trim() ? Upload : this.state.uploadedImageUrl}
-                        alt="upload-image"
-                        className="Upload__Image"
-                    />
-
-                    <button onClick={this.uploadImage} className="Upload__Button">Upload</button>
-                </div>
+                    <button onClick={this.uploadImage} className={styles.Upload__Button}>Upload</button>
             </div>
         );
     }
