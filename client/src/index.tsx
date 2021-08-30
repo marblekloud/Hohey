@@ -15,7 +15,7 @@ import {
 import axios from 'axios';
 
 var videos:any[] = [{filename: ''},];
-axios.get('http://localhost:9890/')
+axios.get('/api/')
   .then((response) => {
     videos.push({
       filename:response.data.images.filename,

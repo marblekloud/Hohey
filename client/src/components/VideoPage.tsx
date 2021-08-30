@@ -24,7 +24,7 @@ class VideoPage extends  PureComponent<{}, VideoState> {
 
     componentDidMount = () => {
         this.fetchVideo( window.location.href.split("/video/").pop());
-        axios.get('http://localhost:9890/')
+        axios.get('/api/')
             .then(response => {
                 this.setState({ imageList: response.data.images });
             })
@@ -32,7 +32,7 @@ class VideoPage extends  PureComponent<{}, VideoState> {
     }
 
     fetchVideo = (filename:any) => {
-        axios.get('http://localhost:9890/video/' + filename)
+        axios.get('/api/video/' + filename)
             .then((response) => {
                 this.setState({ currentVideo: response.data.image });
                 this.setState({currentVideoDate: response.data.image.createdAt.slice(0, -14)})
@@ -47,7 +47,7 @@ class VideoPage extends  PureComponent<{}, VideoState> {
                 <div>
                     <br/>
                     <div className={styles.Recent}>
-                        <video src={'http://localhost:9890/image/' + this.state.currentVideo.filename} className="videoplayer"  width = "960" height = "600" controls>
+                        <video src={'/api/image/' + this.state.currentVideo.filename} className="videoplayer"  width = "960" height = "600" controls>
                         </video>
                         <br/><br/>
                         <b className = {styles.videoTitle}>{this.state.currentVideo.caption}</b> 
@@ -60,8 +60,8 @@ class VideoPage extends  PureComponent<{}, VideoState> {
                 <div className={styles.videolist}>
                     {this.state.imageList.map((file) => (
                         <div className={styles.ListImage}>
-                            <a href={'http://localhost:3000/video/' + file.filename}>
-                                <img src={'http://localhost:9890/image/' + file.filename}
+                            <a href={'/video/' + file.filename}>
+                                <img src={'/api/image/' + file.filename}
                                 className="ListImage__Image"  width = "320" height = "180" >
                                 </img>
                             </a>
