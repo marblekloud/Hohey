@@ -29,6 +29,8 @@
     "multer-gridfs-storage": "^5.0.0",
     "node-ffprobe-installer": "^1.2.3",
     "nodemon": "^2.0.12",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "react-isomorphic-render": "^11.0.64",
+    "redux": "^4.1.1"
   }
 }
