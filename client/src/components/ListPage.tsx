@@ -51,11 +51,11 @@ class ListPage extends PureComponent<{}, ListState> {
                 <div className={styles.listpage}>
                     {this.state.imageList.map((file) => (
                         <div className={styles.ListImage}>
-                            <a href={'/video/' + file.filename}>
-                                <img src={'/api/image/' + file.filename}
-                                className="ListImage__Image"  width = "320" height = "180" >
-                                </img>
-                            </a>
+
+                                <video src={'/api/image/' + file.filename}
+                                className="ListImage__Image"  width = "320" height = "180" controls>
+                                </video>
+
                             <p className={styles.ImageBox__Caption}>{file.caption}</p>
                             <p className="ListImage__Date">Date: {file.createdAt}</p>
                             <button className={styles.ListImage__Delete} onClick={() => this.deleteFile(file._id)}>Delete</button>

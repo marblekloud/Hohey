@@ -25,7 +25,7 @@ axios.get('/api/')
      
 ReactDOM.render(
   <React.StrictMode>
-    <Router history={hashHistory} >
+    <Router >
     <Web3Provider>
       <Nav />
       <Switch>
