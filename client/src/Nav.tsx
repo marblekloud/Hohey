@@ -1,13 +1,11 @@
 import React from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
-import Hohey from './Images/icon.png';
 
 function Nav() {
   return (
     <> 
       <div className="topnav">
-        <img className = "icon" src = {Hohey} alt = "Hohey"/>
         <li className = "list"><Link to="/">
           Home
         </Link>

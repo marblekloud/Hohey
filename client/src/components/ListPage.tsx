@@ -42,8 +42,7 @@ class ListPage extends PureComponent<{}, ListState> {
                 <br/>
             <div className={styles.bannercontainer}>
                 <div className={styles.bannercontainerreal}>
-                <p className={styles.bannerheading}>HoHey</p>
-                <p className={styles.bannercontents}>HoHey is where your film assets are preserved, displayed, and celebrated - all the while you earn passive income.</p>
+                <p className={styles.bannerheading}>Gthings</p>
                 </div>
             </div>
             </div>
